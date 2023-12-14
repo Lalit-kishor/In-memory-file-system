@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In-Memory File System</title>
+  <style>
+    textarea {
+      width: 100%;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="console" readonly></textarea>
+  <input type="text" id="commandInput" placeholder="Enter command">
+  <button onclick="executeCommand()">Execute</button>
+
+  <script src="fileSystem.js"></script>
+  
+  <script>
+    const fileSystem = new FileSystem();
+    const consoleElement = document.getElementById('console');
+    const commandInput = document.getElementById('commandInput');
+
+    function printToConsole(text) {
+      consoleElement.value += text + '\n';
+    }
+
+    function executeCommand() {
+      const command = commandInput.value.trim();
+      if (command) {
+        const result = ui.processCommand(fileSystem, command);
+        printToConsole(result);
+        commandInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
